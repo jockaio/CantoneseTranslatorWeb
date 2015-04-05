@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+<h:head>
+	<link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css' />
+   	<h:outputStylesheet library="css" name="styles.css"  />
+	<title><ui:insert name="title">Translate Cantonese</ui:insert></title>
+</h:head>
+
+<body>
+<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+
+<div id="header">
+    <ui:insert name="header">
+    	<h1 class="title" ><a href="index.jsf">Translate Cantonese</a></h1>
+    </ui:insert>
+</div>
+
+
+<div id="content">
+  <ui:insert name="content">
+  </ui:insert>
+</div>
+
+<div id="footer">
+  <ui:insert name="footer">
+    	<p>Nothing is what it used to be.</p>
+  </ui:insert>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="templates/default-template.xhtml">
+	<ui:define name="content">
+		<h:form id="input-form">
+			<div id="input-section">			
+				<h3>What do you want to know?</h3>
+				<p:panel>
+					<p:inputTextarea id="input" value="#{translationBean.userInput}"/>
+					<p:commandButton id="translateButton" 
+						value="Translate" actionListener="#{translationBean.translateWordsInterface}" update="translation">
+						<f:ajax render="translation" />
+					</p:commandButton>
+				</p:panel>	
+			</div>
+			<div id="output-section">
+				<p:commandButton id="filterJPing" value="Toggle Juytping"/>
+				<h3>Translation</h3>
+				<p:panel id="translation">
+					<div class="translation">
+						<ui:repeat value="#{translationBean.translatedWords}" var="word">		
+							<div class="word">
+								<p:commandLink update=":updateWordForm" oncomplete="PF('dlg1').show()" title="add-translation">
+									<f:setPropertyActionListener value="#{word}" target="#{translationBean.selectedWord}" />
+									<div class="cantonese">#{word.cantonese}</div>
+									<div class="jping">
+										<h:outputText rendered="#{word.jping != 'null0'}" value="#{word.jping}" />
+									</div>
+									<div class="english">
+										<h:outputText rendered="#{word.english != 'null'}" value="#{word.english}" />
+									</div>
+						        </p:commandLink>
+							</div>
+						</ui:repeat>
+					</div>
+				</p:panel>
+			</div>
+		</h:form>
+		
+		<p:dialog header="Update Word" widgetVar="dlg1" minHeight="40">
+		    <h:form id="updateWordForm">
+		    	<div class="cantonese">#{translationBean.selectedWord.cantonese}</div>
+		    	<p>Jyutping:</p>
+				<p:inputText value="#{translationBean.selectedWord.jping}"/>
+				<p>English:</p>
+				<p:inputText value="#{translationBean.selectedWord.english}"/>
+				<br/>
+				<br/>
+				<p:commandButton id="updateButton" 
+					value="Update Word" actionListener="#{translationBean.updateWord}" oncomplete="PF('dlg1').hide()">
+					<f:ajax render=":input-form:translation"/>
+				</p:commandButton>
+			</h:form>
+		</p:dialog>
+		
+		<h:outputScript>
+		
+			$(PrimeFaces.escapeClientId("input-form:filterJPing")).on("click", function(){
+				  $(".jping").toggle();	
+			});
+			
+			$(".word").each(function(){
+				if($(this).find(".cantonese").val() == '\n'){
+					$(this).css("clear", "right");
+				}
+			});
+			
+		</h:outputScript>
+	</ui:define>
+</ui:composition>
+</html>
