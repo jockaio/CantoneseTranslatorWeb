@@ -81,7 +81,6 @@ public class Database {
 	public void runInsertQuery(PreparedStatement stmt, Connection con) {
 		
 		try {
-			System.out.println("Trying to insert: ");
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

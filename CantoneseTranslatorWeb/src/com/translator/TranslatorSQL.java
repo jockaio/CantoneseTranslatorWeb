@@ -31,9 +31,8 @@ public class TranslatorSQL {
 		
 		System.out.println("Translating this: "+characters);
 		
-		ps = con.prepareStatement("SELECT * FROM CANTO.TRANS_WORDS WHERE cantonese = ?");
-		
 		for(String character : characters){
+			ps = con.prepareStatement("SELECT * FROM CANTO.TRANS_WORDS WHERE cantonese = ?");
 			if(!character.equalsIgnoreCase("")){
 				ps.setString(1, character);
 				ResultSet result = db.runViewQuery(ps, con);	
