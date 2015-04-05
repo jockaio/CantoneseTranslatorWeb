@@ -43,6 +43,7 @@ public class TranslatorSQL {
 					words.add(word);
 				}else{
 					while(result.next()){
+						System.out.println(result.getString(2)+" "+ result.getString(3)+result.getInt(5) +" "+ result.getString(4));
 						Word word = new Word(result.getString(2), result.getString(3)+result.getInt(5), result.getString(4));
 						words.add(word);
 					}
