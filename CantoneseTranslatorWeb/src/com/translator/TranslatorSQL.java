@@ -49,6 +49,8 @@ public class TranslatorSQL {
 				}
 			}
 			
+			ps.close();
+
 		}
 		
 		return words;
