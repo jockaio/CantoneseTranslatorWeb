@@ -25,19 +25,24 @@
 				<h3>Translation</h3>
 				<p:panel id="translation">
 					<div class="translation">
-						<ui:repeat value="#{translationBean.translatedWords}" var="word">		
-							<div class="word">
-								<p:commandLink update=":updateWordForm" oncomplete="PF('dlg1').show()" title="add-translation">
-									<f:setPropertyActionListener value="#{word}" target="#{translationBean.selectedWord}" />
-									<div class="cantonese">#{word.cantonese}</div>
-									<div class="jping">
-										<h:outputText rendered="#{word.jping != 'null0'}" value="#{word.jping}" />
+						<ui:repeat value="#{translationBean.translatedRows}" var="row">
+							<div class="row">
+								<ui:repeat var="word" value="#{row.cantoWords}">
+									<div class="word">
+										<p:commandLink update=":updateWordForm" oncomplete="PF('dlg1').show()" title="Add translation">
+											<f:setPropertyActionListener value="#{word}" target="#{translationBean.selectedWord}" />
+											<f:setPropertyActionListener value="#{row}" target="#{translationBean.selectedRow}" />
+											<div class="cantonese">#{word.cantonese}</div>
+											<div class="jping">
+												<h:outputText rendered="#{word.jping != 'null0'}" value="#{word.jping}" />
+											</div>
+											<div class="english">
+												<h:outputText rendered="#{word.english != 'null'}" value="#{word.english}" />
+											</div>
+								        </p:commandLink>
 									</div>
-									<div class="english">
-										<h:outputText rendered="#{word.english != 'null'}" value="#{word.english}" />
-									</div>
-						        </p:commandLink>
-							</div>
+								</ui:repeat>
+							</div>		
 						</ui:repeat>
 					</div>
 				</p:panel>
@@ -64,14 +69,7 @@
 		
 			$(PrimeFaces.escapeClientId("input-form:filterJPing")).on("click", function(){
 				  $(".jping").toggle();	
-			});
-			
-			$(".word").each(function(){
-				if($(this).find(".cantonese").val() == '\n'){
-					$(this).css("clear", "right");
-				}
-			});
-			
+			});			
 		</h:outputScript>
 	</ui:define>
 </ui:composition>

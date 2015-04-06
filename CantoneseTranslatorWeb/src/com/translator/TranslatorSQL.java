@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.database.Database;
 import com.words.Word;
+import com.words.WordRow;
 
 public class TranslatorSQL {
 	
@@ -19,6 +20,17 @@ public class TranslatorSQL {
 	
 	public TranslatorSQL(){
 		
+	}
+	
+	public List<WordRow> getWordRows(String cantoString){
+		List<WordRow> wordRows = new ArrayList<WordRow>();
+		List<String> stringRows = Arrays.asList(cantoString.split("\n"));
+		for(String row : stringRows){
+			WordRow wr = new WordRow(row);
+			wordRows.add(wr);
+		}
+		
+		return wordRows;
 	}
 	
 	public List<Word> translateWords(String cantoString) throws SQLException{
@@ -68,6 +80,8 @@ public class TranslatorSQL {
 		
 		db.runInsertQuery(ps, con);
 		
+		ps.close();
+		
 	}
 	
 	public List<Word> getAllWords() throws SQLException{
@@ -83,6 +97,8 @@ public class TranslatorSQL {
 		}
 		
 		System.out.println(words);
+		
+		ps.close();
 			
 		return words;
 	}
@@ -98,6 +114,8 @@ public class TranslatorSQL {
 		ps.setString(4, word.getCantonese());
 		
 		db.runInsertQuery(ps , con);
+		
+		ps.close();
 	}
 	
 

@@ -10,34 +10,27 @@ import javax.faces.event.ActionEvent;
 
 import com.translator.TranslatorSQL;
 import com.words.Word;
+import com.words.WordRow;
 
 @ManagedBean
 @ViewScoped
 public class TranslationBean {
 	
-	private List<Word> translatedWords = new ArrayList<Word>();
+	private List<WordRow> translatedRows = new ArrayList<WordRow>();
 	private String userInput;
 	private Word selectedWord;
+	private WordRow selectedRow;
 	private TranslatorSQL t = new TranslatorSQL();
-
-	public List<Word> getTranslatedWords() {
-		return translatedWords;
-	}
-
-	public void setTranslatedWords(List<Word> translatedWords) {
-		this.translatedWords = translatedWords;
-	}
 	
 	public void translateWordsInterface(ActionEvent event){
 		
-		try {
-			translatedWords = t.translateWords(userInput);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		translatedRows = t.getWordRows(userInput);
 		
-		System.out.println(translatedWords);
+		System.out.println(translatedRows);
+	}
+	
+	public List<WordRow> getTranslatedRows(){
+		return translatedRows;
 	}
 	
 	public void updateWord(ActionEvent event) throws SQLException{
@@ -53,7 +46,7 @@ public class TranslationBean {
 		
 		t.updateWord(selectedWord);
 		
-		t.translateWords(userInput);
+		selectedRow.setCantoWords(t.translateWords(selectedRow.getWordString()));
 
 	}
 
@@ -72,6 +65,14 @@ public class TranslationBean {
 	public void setSelectedWord(Word selectedWord) {
 		this.selectedWord = selectedWord;
 		System.out.println("Selected word: "+this.selectedWord.getCantonese());
+	}
+
+	public WordRow getSelectedRow() {
+		return selectedRow;
+	}
+
+	public void setSelectedRow(WordRow selectedRow) {
+		this.selectedRow = selectedRow;
 	}
 
 }
