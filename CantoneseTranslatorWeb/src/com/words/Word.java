@@ -9,9 +9,8 @@ public class Word {
 	
 	public Word(String cantonese, String jping, String english){
 		this.setCantonese(cantonese);
-		this.setJping(jping.substring(0, jping.length() -1));
+		this.setJping(jping);
 		this.setEnglish(english);
-		this.setTone(Integer.parseInt(jping.substring(jping.length()-1, jping.length())));
 	}
 	
 	public Word(String cantonese){
@@ -25,17 +24,18 @@ public class Word {
 	public void setCantonese(String cantonese) {
 		this.cantonese = cantonese;
 	}
-
-	public String getJping() {
-		return jping+tone;
-	}
 	
 	public String getJpingNoTone(){
 		return jping;
 	}
 
+	public String getJping() {
+		return jping+tone;
+	}
+
 	public void setJping(String jping) {	
-		this.jping = jping;
+		this.jping = jping.substring(0, jping.length() -1);
+		this.setTone(Integer.parseInt(jping.substring(jping.length()-1, jping.length())));
 	}
 
 	public String getEnglish() {

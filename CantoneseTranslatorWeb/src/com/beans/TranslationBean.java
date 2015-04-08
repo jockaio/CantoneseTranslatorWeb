@@ -34,13 +34,9 @@ public class TranslationBean {
 	}
 	
 	public void updateWord(ActionEvent event) throws SQLException{
-		
-		String jping = selectedWord.getJpingNoTone();
-		selectedWord.setJping(jping.substring(0, jping.length()-1));
-		System.out.println("Juytping = "+jping);
-		int tone = Integer.parseInt(jping.substring(jping.length()-1, jping.length()));
-		System.out.println("Tone of this word is "+tone);
-		selectedWord.setTone(tone);
+	
+		System.out.println("Juytping = "+selectedWord.getJping());
+		System.out.println("Tone of this word is "+selectedWord.getTone());
 		
 		System.out.println("Trying to update word:"+selectedWord.getCantonese());
 		
@@ -64,7 +60,7 @@ public class TranslationBean {
 
 	public void setSelectedWord(Word selectedWord) {
 		this.selectedWord = selectedWord;
-		System.out.println("Selected word: "+this.selectedWord.getCantonese());
+		System.out.println("Selected word: "+this.selectedWord.getCantonese()+" "+this.selectedWord.getJping());
 	}
 
 	public WordRow getSelectedRow() {

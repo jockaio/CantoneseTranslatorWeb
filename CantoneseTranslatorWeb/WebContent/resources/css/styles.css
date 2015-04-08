@@ -78,6 +78,33 @@ body {
 	display:none;
 }
 
+#readInfo .english, #readInfo .cantonese, #readInfo .jping{
+	display: block;
+}
+
+#editInfo{
+	display: none;
+}
+
+#updateWordFrom {
+	width: 300px;
+}
+
+#updateWordForm .cantonese {
+	font-size: 64px;
+	text-align: center;
+}
+
+#updateWordForm p{
+	font-size: small;
+}
+
+#updateWordForm\:toggleEditDialog{
+	float: right;
+  	font-size: small;
+  	color: #999;
+}
+
 #input-form\:filterJPing{
 	float: right;
 	font-size: small;

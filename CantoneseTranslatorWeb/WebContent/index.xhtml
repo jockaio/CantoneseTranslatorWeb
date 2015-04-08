@@ -49,26 +49,44 @@
 			</div>
 		</h:form>
 		
-		<p:dialog header="Update Word" widgetVar="dlg1" minHeight="40">
+		<p:dialog header="Update Word" widgetVar="dlg1" minHeight="40" style="min-width:300px; max-width: 300px;">
 		    <h:form id="updateWordForm">
 		    	<div class="cantonese">#{translationBean.selectedWord.cantonese}</div>
-		    	<p>Jyutping:</p>
-				<p:inputText value="#{translationBean.selectedWord.jping}"/>
-				<p>English:</p>
-				<p:inputText value="#{translationBean.selectedWord.english}"/>
-				<br/>
-				<br/>
-				<p:commandButton id="updateButton" 
-					value="Update Word" actionListener="#{translationBean.updateWord}" oncomplete="PF('dlg1').hide()">
-					<f:ajax render=":input-form:translation"/>
-				</p:commandButton>
+		    	<p:commandLink id="toggleEditDialog" value="Edit"/>
+		    	<h:outputScript>
+					$(PrimeFaces.escapeClientId("updateWordForm:toggleEditDialog")).on("click", function(){	
+						  $("#readInfo").slideToggle("medium");
+						  $("#editInfo").slideToggle("medium");
+					});			
+				</h:outputScript>
+		    	<div id="readInfo">
+		    		<p>Jyutping</p>		    	
+			    	<div class="jping">#{translationBean.selectedWord.jping}</div>
+			    	<p>English meaning</p>
+			    	<div class="english">#{translationBean.selectedWord.english}</div>
+		    	</div>
+		    	<div id="editInfo">
+			    	<p>Jyutping</p>
+					<p:inputText value="#{translationBean.selectedWord.jping}"/>
+					<p>English meaning</p>
+					<p:inputText value="#{translationBean.selectedWord.english}"/>
+					<br/>
+					<br/>
+					<p:commandButton id="updateButton" 
+						value="Update Word" actionListener="#{translationBean.updateWord}" oncomplete="PF('dlg1').hide()" update=":input-form:translation">
+					</p:commandButton>
+				</div>
 			</h:form>
 		</p:dialog>
 		
 		<h:outputScript>
-		
 			$(PrimeFaces.escapeClientId("input-form:filterJPing")).on("click", function(){
 				  $(".jping").toggle();	
+				  console.log("toggle jping");
+			});
+			
+			$(PrimeFaces.escapeClientId("updateWordForm:toggleEditDialog")).on("click", function(){	
+				  console.log("toggle jping");
 			});			
 		</h:outputScript>
 	</ui:define>
