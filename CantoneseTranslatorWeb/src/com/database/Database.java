@@ -5,13 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
  
 public class Database {
 	
 	private static final String USER = "CANTO";
 	private static final String PASSWORD = "1234";
-	private static final String DB_NAME = "CANTO";
 	
 	public Connection getConnection(){
 		
@@ -59,7 +57,7 @@ public class Database {
 		return connection;
 	}
 
-	public ResultSet runViewQuery(PreparedStatement stmt, Connection con) {
+	public ResultSet runViewQuery(PreparedStatement stmt) throws SQLException {
 		
 		ResultSet rs = null;
 	 
@@ -74,11 +72,12 @@ public class Database {
 	    } catch (SQLException e ) {
 	        e.printStackTrace();
 	    }
+	    
 		return rs; 
 	    
 	}
 
-	public void runInsertQuery(PreparedStatement stmt, Connection con) {
+	public void runInsertQuery(PreparedStatement stmt) throws SQLException {
 		
 		try {
 			stmt.executeUpdate();

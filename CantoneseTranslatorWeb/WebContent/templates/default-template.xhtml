@@ -7,6 +7,7 @@
       >
 <h:head>
 	<link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
    	<h:outputStylesheet library="css" name="styles.css"  />
 	<title><ui:insert name="title">Translate Cantonese</ui:insert></title>
 </h:head>
@@ -17,9 +18,15 @@
 <div id="header">
     <ui:insert name="header">
     	<h1 class="title" ><a href="index.jsf">Translate Cantonese</a></h1>
+    	<div class="pure-menu pure-menu-horizontal">
+		    <a href="index.jsf" class="pure-menu-heading pure-menu-link">HOME</a>
+		    <ul class="pure-menu-list">
+		        <li class="pure-menu-item"><a href="index.jsf" class="pure-menu-link">Translate</a></li>
+		        <li class="pure-menu-item"><a href="game.jsf" class="pure-menu-link">Test yourself</a></li>
+		    </ul>
+		</div>
     </ui:insert>
 </div>
-
 
 <div id="content">
   <ui:insert name="content">
@@ -28,7 +35,7 @@
 
 <div id="footer">
   <ui:insert name="footer">
-    	<p>Nothing is what it used to be.</p>
+    	<p>JH 2015&copy;</p>
   </ui:insert>
 </div>
 

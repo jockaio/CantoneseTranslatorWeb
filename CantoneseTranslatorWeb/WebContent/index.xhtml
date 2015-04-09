@@ -13,10 +13,9 @@
 			<div id="input-section">			
 				<h3>What do you want to know?</h3>
 				<p:panel>
-					<p:inputTextarea id="input" value="#{translationBean.userInput}"/>
+					<p:inputTextarea id="input" value="#{translationBean.userInput}" style="max-height:250px; overflow-y:scroll;" />
 					<p:commandButton id="translateButton" 
 						value="Translate" actionListener="#{translationBean.translateWordsInterface}" update="translation">
-						<f:ajax render="translation" />
 					</p:commandButton>
 				</p:panel>	
 			</div>
@@ -25,7 +24,7 @@
 				<h3>Translation</h3>
 				<p:panel id="translation">
 					<div class="translation">
-						<ui:repeat value="#{translationBean.translatedRows}" var="row">
+						<p:dataScroller value="#{translationBean.translatedRows}" var="row" chunkSize="10">
 							<div class="row">
 								<ui:repeat var="word" value="#{row.cantoWords}">
 									<div class="word">
@@ -43,7 +42,7 @@
 									</div>
 								</ui:repeat>
 							</div>		
-						</ui:repeat>
+						</p:dataScroller>
 					</div>
 				</p:panel>
 			</div>

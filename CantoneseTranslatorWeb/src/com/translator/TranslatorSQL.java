@@ -22,11 +22,11 @@ public class TranslatorSQL {
 		
 	}
 	
-	public List<WordRow> getWordRows(String cantoString){
+	public List<WordRow> getWordRows(String cantoString) throws SQLException{
 		List<WordRow> wordRows = new ArrayList<WordRow>();
 		List<String> stringRows = Arrays.asList(cantoString.split("\n"));
 		for(String row : stringRows){
-			WordRow wr = new WordRow(row);
+			WordRow wr = new WordRow(row, translateWords(row));
 			wordRows.add(wr);
 		}
 		
@@ -35,7 +35,7 @@ public class TranslatorSQL {
 	
 	public List<Word> translateWords(String cantoString) throws SQLException{
 		
-		String regEx = "([\\da-ö+-])";
+		String regEx = "([\\da-öA-Ö+-])";
 		cantoString = cantoString.trim();
 		cantoString = cantoString.replaceAll(regEx, "");
 		List<String> characters = Arrays.asList(cantoString.split(""));
@@ -47,7 +47,7 @@ public class TranslatorSQL {
 			ps = con.prepareStatement("SELECT * FROM CANTO.TRANS_WORDS WHERE cantonese = ?");
 			if(!character.equalsIgnoreCase("")){
 				ps.setString(1, character);
-				ResultSet result = db.runViewQuery(ps, con);	
+				ResultSet result = db.runViewQuery(ps);	
 				if(!result.isBeforeFirst()){
 					Word word = new Word(character);
 					insertWord(word);
@@ -60,9 +60,7 @@ public class TranslatorSQL {
 					}
 				}
 			}
-			
 			ps.close();
-
 		}
 		
 		return words;
@@ -78,10 +76,8 @@ public class TranslatorSQL {
 		ps.setString(3, word.getEnglish());
 		ps.setInt(4, word.getTone());
 		
-		db.runInsertQuery(ps, con);
-		
+		db.runInsertQuery(ps);
 		ps.close();
-		
 	}
 	
 	public List<Word> getAllWords() throws SQLException{
@@ -90,16 +86,14 @@ public class TranslatorSQL {
 		
 		ps = con.prepareStatement("SELECT * FROM CANTO.TRANS_WORDS");
 				
-		ResultSet result = db.runViewQuery(ps , con);	
+		ResultSet result = db.runViewQuery(ps);	
 		while(result.next()){
 			Word word = new Word(result.getString(2), result.getString(3)+result.getInt(5), result.getString(4));
 			words.add(word);
 		}
 		
 		System.out.println(words);
-		
 		ps.close();
-			
 		return words;
 	}
 	
@@ -113,10 +107,8 @@ public class TranslatorSQL {
 		ps.setInt(3, word.getTone());
 		ps.setString(4, word.getCantonese());
 		
-		db.runInsertQuery(ps , con);
-		
+		db.runInsertQuery(ps);
 		ps.close();
 	}
 	
-
 }

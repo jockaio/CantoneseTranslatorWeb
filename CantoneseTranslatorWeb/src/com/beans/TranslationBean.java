@@ -22,7 +22,7 @@ public class TranslationBean {
 	private WordRow selectedRow;
 	private TranslatorSQL t = new TranslatorSQL();
 	
-	public void translateWordsInterface(ActionEvent event){
+	public void translateWordsInterface(ActionEvent event) throws SQLException{
 		
 		translatedRows = t.getWordRows(userInput);
 		
