@@ -115,4 +115,15 @@ body {
 	padding: 0px!important;
 }
 
+#game-form\:next-word-button {
+	display:none;
+}
+
+#game-form\:game-field_content div{
+	display:inline-block;
+}
+
+#game-canto {
+	font-size: 128px;
+}
 

@@ -60,13 +60,20 @@
 				</h:outputScript>
 		    	<div id="readInfo">
 		    		<p>Jyutping</p>		    	
-			    	<div class="jping">#{translationBean.selectedWord.jping}</div>
+			    	<div class="jping">
+			    		<h:outputText rendered="#{translationBean.selectedWord.jping != 'null0'}" value="#{translationBean.selectedWord.jping}" />
+			    		<h:outputText rendered="#{translationBean.selectedWord.jping == 'null0'}" value="No translation" />
+			    	</div>
 			    	<p>English meaning</p>
-			    	<div class="english">#{translationBean.selectedWord.english}</div>
+			    	<div class="english">
+			    		<h:outputText rendered="#{translationBean.selectedWord.english != 'null' || translationBean.selectedWord.english != ''}" value="#{translationBean.selectedWord.english}" />
+			    		<h:outputText rendered="#{translationBean.selectedWord.english == 'null' || translationBean.selectedWord.english == null}" value="No translation" />
+			    	</div>
 		    	</div>
 		    	<div id="editInfo">
 			    	<p>Jyutping</p>
-					<p:inputText value="#{translationBean.selectedWord.jping}"/>
+					<p:inputText rendered="#{word.jping != 'null0'}" value="#{translationBean.selectedWord.jping}"/>
+					<p:inputText rendered="#{word.jping == 'null0'}" />
 					<p>English meaning</p>
 					<p:inputText value="#{translationBean.selectedWord.english}"/>
 					<br/>

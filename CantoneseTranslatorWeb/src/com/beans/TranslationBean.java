@@ -20,9 +20,12 @@ public class TranslationBean {
 	private String userInput;
 	private Word selectedWord;
 	private WordRow selectedRow;
-	private TranslatorSQL t = new TranslatorSQL();
+	private TranslatorSQL t = null;
 	
 	public void translateWordsInterface(ActionEvent event) throws SQLException{
+		if(t == null){
+			t = new TranslatorSQL();
+		}
 		
 		translatedRows = t.getWordRows(userInput);
 		
@@ -34,7 +37,10 @@ public class TranslationBean {
 	}
 	
 	public void updateWord(ActionEvent event) throws SQLException{
-	
+		if(t == null){
+			t = new TranslatorSQL();
+		}
+		
 		System.out.println("Juytping = "+selectedWord.getJping());
 		System.out.println("Tone of this word is "+selectedWord.getTone());
 		

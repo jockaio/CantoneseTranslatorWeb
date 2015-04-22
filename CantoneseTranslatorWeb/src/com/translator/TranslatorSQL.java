@@ -110,5 +110,23 @@ public class TranslatorSQL {
 		db.runInsertQuery(ps);
 		ps.close();
 	}
+
+	public List<Word> getRandomWords(int length) throws SQLException {
+		List<Word> words = new ArrayList<Word>();
+		ps = con.prepareStatement("SELECT * FROM (SELECT * FROM CANTO.TRANS_WORDS SAMPLE (20)) WHERE"
+				+ " JYUTPING != 'null' and rownum <= ?");
+		
+		ps.setInt(1, length);
+		db.runViewQuery(ps);
+		
+		ResultSet result = db.runViewQuery(ps);	
+		while(result.next()){
+			Word word = new Word(result.getString(2), result.getString(3)+result.getInt(5), result.getString(4));
+			words.add(word);
+		}
+		ps.close();
+		
+		return words;
+	}
 	
 }
