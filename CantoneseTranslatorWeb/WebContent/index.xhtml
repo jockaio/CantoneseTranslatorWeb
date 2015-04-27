@@ -72,8 +72,7 @@
 		    	</div>
 		    	<div id="editInfo">
 			    	<p>Jyutping</p>
-					<p:inputText rendered="#{word.jping != 'null0'}" value="#{translationBean.selectedWord.jping}"/>
-					<p:inputText rendered="#{word.jping == 'null0'}" />
+					<p:inputText value="#{translationBean.selectedWord.jping}"/>
 					<p>English meaning</p>
 					<p:inputText value="#{translationBean.selectedWord.english}"/>
 					<br/>

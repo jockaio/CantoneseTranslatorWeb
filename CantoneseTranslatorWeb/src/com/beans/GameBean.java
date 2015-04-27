@@ -1,8 +1,10 @@
 package com.beans;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -15,6 +17,7 @@ import com.words.Word;
 public class GameBean {
 	private List<Word> quizWords;
 	private List<String> answers;
+	private List<String> answerResults; 
 	private Word selectedWord; 
 	private String answer;
 	private int score;
@@ -45,6 +48,12 @@ public class GameBean {
 	public void setAnswers(List<String> answers) {
 		this.answers = answers;
 	}
+	public List<String> getAnswerResults() {
+		return answerResults;
+	}
+	public void setAnswerResults(List<String> answerResults) {
+		this.answerResults = answerResults;
+	}
 	public int getLength() {
 		return length;
 	}
@@ -57,6 +66,13 @@ public class GameBean {
 	public void setScore(int score) {
 		this.score = score;
 	}
+	
+	@PostConstruct
+    public void initLists() {
+        answers = new ArrayList<String>();
+        answerResults = new ArrayList<String>();
+    }
+	
 	public void startGame(ActionEvent e) throws SQLException{
 		if(t == null){
 			t = new TranslatorSQL();
@@ -73,6 +89,21 @@ public class GameBean {
 	public void nextWord(ActionEvent e){
 		int currentIndex = quizWords.indexOf(selectedWord);
 		if(currentIndex < quizWords.size()-1){
+			answers.add(answer);
+			
+			if(answer.equalsIgnoreCase(selectedWord.getJping())){
+				System.out.println("correct answer");
+				answerResults.add("Correct");
+			}else{
+				System.out.println("wrong answer");
+				answerResults.add("Wrong");
+			}
+			
+			System.out.println(selectedWord.getJping());
+			System.out.println(answer);
+			System.out.println(answers);
+			System.out.println(answerResults);
+		
 			selectedWord = quizWords.get(currentIndex+1);
 		}
 	}
