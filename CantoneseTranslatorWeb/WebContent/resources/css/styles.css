@@ -115,15 +115,45 @@ body {
 	padding: 0px!important;
 }
 
-#game-form\:next-word-button {
-	display:none;
+#game-form\:console{
+	margin: 0px 15px;
+  	vertical-align: middle;
+}
+
+#game-form\:game-field {
+	display: none;
 }
 
 #game-form\:game-field_content div{
-	display:inline-block;
+	display:block;
 }
 
 #game-canto {
 	font-size: 128px;
+	float:left;
 }
 
+#game-jping{
+	display: none !important;
+}
+
+#game-english{
+	display: none !important;
+}
+
+.correct{
+	color: #006600;
+}
+
+.wrong{
+	color: #660000;
+}
+
+#answer-input{
+	padding:12px;
+	float:left;
+}
+
+.answer-input-div{
+	margin-top: 10px;
+}

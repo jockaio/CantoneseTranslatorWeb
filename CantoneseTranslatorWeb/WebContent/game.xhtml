@@ -10,28 +10,50 @@
 		<ui:define name="content">
 			<h3>Test yourself</h3>
 			<h:form id="game-form">
-				<p:selectOneMenu id="console" value="#{gameBean.length}" style="width:125px">
-		            <f:selectItem itemLabel="10" itemValue="10" />
-		            <f:selectItem itemLabel="15" itemValue="15" />
-		            <f:selectItem itemLabel="20" itemValue="20" />
-		        </p:selectOneMenu> 
-				<p:commandButton id="start-game-button" value="Start Game" actionListener="#{gameBean.startGame}" update="game-field">
-				</p:commandButton>
-				<h:outputScript>
-					$(PrimeFaces.escapeClientId("game-form:start-game-button")).on("click", function(){	
-						  $(PrimeFaces.escapeClientId("game-form:start-game-button")).toggle();
-						  $(PrimeFaces.escapeClientId("game-form:console")).toggle();
-						  $(PrimeFaces.escapeClientId("game-form:next-word-button")).toggle();
-						  console.log("push");
-					});	
-				</h:outputScript>
-				<p:panel id="game-field" widgetVar="game-field-panel">
-					<div id="game-canto">#{gameBean.selectedWord.cantonese}</div>
-					<p:inputText value="#{gameBean.answer}" style="width: 100px;"/>
-					<div id="game-jping">#{gameBean.selectedWord.jping}</div>
-					<div id="game-english">#{gameBean.selectedWord.english}</div>
+				<p:panel id="start-game-panel" widgetVar="start-game-panel">
+					<label for="console">How many words?</label>
+					<p:selectOneMenu id="console" value="#{gameBean.length}" style="width:125px">
+			            <f:selectItem itemLabel="10" itemValue="10" />
+			            <f:selectItem itemLabel="15" itemValue="15" />
+			            <f:selectItem itemLabel="20" itemValue="20" />
+			        </p:selectOneMenu>
+			        <div> 
+			        	<p:commandButton id="start-game-button" value="Start Game" actionListener="#{gameBean.startGame}" update="game-field" oncomplete="$(PrimeFaces.escapeClientId('game-form:game-field')).toggle();">
+						</p:commandButton>
+					</div>
+					<h:outputScript>
+							$(PrimeFaces.escapeClientId("game-form:start-game-button")).on("click", function(){
+								  $(PrimeFaces.escapeClientId("game-form:start-game-panel")).toggle();
+								  $(PrimeFaces.escapeClientId("game-form:game-field")).toggle();
+								  console.log("toggle");
+							});
+					</h:outputScript>
 				</p:panel>
-				<p:commandButton id="next-word-button" value="Next Word" actionListener="#{gameBean.nextWord}" update="game-field"></p:commandButton>
+				<p:panel id="game-field" widgetVar="game-field-panel">
+					<p:panel id="game-wrapper">
+						<div id="progressbar">
+							<ui:repeat value="#{gameBean.answerResults}" var="ans">
+								<h:outputFormat class="correct" rendered="#{ans == 'Correct'}" value="#{ans}" />
+								<h:outputFormat class="wrong" rendered="#{ans == 'Wrong'}" value="#{ans}" />
+							</ui:repeat>
+						</div>
+						<div id="game-canto">#{gameBean.selectedWord.cantonese}</div>
+						<div id="answer-input">
+							<div class="answer-input-div">
+								<label for="user-answer">Jyutping</label>
+							</div>
+							<div class="answer-input-div">
+							<p:inputText id="user-answer" value="#{gameBean.answer}" style="width: 115px;"/>
+							</div>
+							<div id="game-jping">#{gameBean.selectedWord.jping}</div>
+							<div id="game-english">#{gameBean.selectedWord.english}</div>
+							<div class="answer-input-div">
+								<p:commandButton id="next-word-button" value="Next Word" actionListener="#{gameBean.nextWord}" update="game-form:game-wrapper"></p:commandButton>
+							</div>
+						</div>					
+					</p:panel>
+				</p:panel>
+				
 			</h:form>
 		</ui:define>
 	</ui:composition>
