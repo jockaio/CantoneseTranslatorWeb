@@ -14,7 +14,9 @@ import com.words.Word;
 
 @ManagedBean
 @ViewScoped
-public class GameBean {
+public class GameBean implements java.io.Serializable{
+	private static final long serialVersionUID = -6470090944414208496L;
+	
 	private List<Word> quizWords;
 	private List<String> answers;
 	private List<String> answerResults; 

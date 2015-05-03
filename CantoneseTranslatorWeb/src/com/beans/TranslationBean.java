@@ -14,7 +14,8 @@ import com.words.WordRow;
 
 @ManagedBean
 @ViewScoped
-public class TranslationBean {
+public class TranslationBean implements java.io.Serializable{
+	private static final long serialVersionUID = -6470090944414208496L;
 	
 	private List<WordRow> translatedRows = new ArrayList<WordRow>();
 	private String userInput;
