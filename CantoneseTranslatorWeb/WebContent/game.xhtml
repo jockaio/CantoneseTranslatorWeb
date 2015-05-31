@@ -32,10 +32,16 @@
 				<p:panel id="game-field" widgetVar="game-field-panel">
 					<p:panel id="game-wrapper">
 						<div id="progressbar">
-							<ui:repeat value="#{gameBean.answerResults}" var="ans">
-								<h:outputFormat class="correct" rendered="#{ans == 'Correct'}" value="#{ans}" />
-								<h:outputFormat class="wrong" rendered="#{ans == 'Wrong'}" value="#{ans}" />
-							</ui:repeat>
+							<div>
+								<ui:repeat var="answer" value="#{gameBean.answers}">
+									<div class="answer-div"><h:outputText value="#{answer}" /></div>								
+								</ui:repeat>
+							</div>
+							<div>
+								<ui:repeat value="#{gameBean.answerResults}" var="ans">
+									<div class="answer-div"><h:outputText class="#{ans}" value="#{ans}" /></div>
+								</ui:repeat>
+							</div>
 						</div>
 						<div id="game-canto">#{gameBean.selectedWord.cantonese}</div>
 						<div id="answer-input">

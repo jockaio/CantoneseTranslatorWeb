@@ -125,7 +125,6 @@ body {
 }
 
 #game-form\:game-field_content div{
-	display:block;
 }
 
 #game-canto {
@@ -141,11 +140,11 @@ body {
 	display: none !important;
 }
 
-.correct{
+.Correct{
 	color: #006600;
 }
 
-.wrong{
+.Wrong{
 	color: #660000;
 }
 
@@ -156,4 +155,9 @@ body {
 
 .answer-input-div{
 	margin-top: 10px;
+}
+
+.answer-div {
+	display:inline-block;
+	width: 60px;
 }
