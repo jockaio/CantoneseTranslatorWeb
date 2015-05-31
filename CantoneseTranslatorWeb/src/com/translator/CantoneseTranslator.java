@@ -1,5 +1,6 @@
 package com.translator;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import com.words.Word;
 
 public class CantoneseTranslator {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 		
 		Scanner in = new Scanner(System.in);
 		

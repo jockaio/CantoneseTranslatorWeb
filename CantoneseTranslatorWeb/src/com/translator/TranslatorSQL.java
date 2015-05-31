@@ -1,5 +1,6 @@
 package com.translator;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ public class TranslatorSQL {
 		
 	}
 	
-	public List<WordRow> getWordRows(String cantoString) throws SQLException{
+	public List<WordRow> getWordRows(String cantoString) throws SQLException, IOException{
 		List<WordRow> wordRows = new ArrayList<WordRow>();
 		List<String> stringRows = Arrays.asList(cantoString.split("\n"));
 		for(String row : stringRows){
@@ -33,7 +34,7 @@ public class TranslatorSQL {
 		return wordRows;
 	}
 	
-	public List<Word> translateWords(String cantoString) throws SQLException{
+	public List<Word> translateWords(String cantoString) throws SQLException, IOException{
 		
 		String regEx = "([\\da-öA-Ö+-])";
 		cantoString = cantoString.trim();
@@ -66,7 +67,11 @@ public class TranslatorSQL {
 		return words;
 	}
 	
-	public void insertWord(Word word) throws SQLException{
+	public void insertWord(Word word) throws SQLException, IOException{
+		
+		if(word.getEnglish() == null && word.getJpingNoTone() == null){
+			word = RwHTML.scrapeWordDetails(word);
+		}
 		
 		ps = con.prepareStatement("INSERT INTO CANTO.TRANS_WORDS (cantonese, jyutping, english, tone) "
 				+ "VALUES(?,?,?,?)");

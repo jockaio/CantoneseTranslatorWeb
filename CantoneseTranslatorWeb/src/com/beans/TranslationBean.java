@@ -1,5 +1,6 @@
 package com.beans;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class TranslationBean {
 	private WordRow selectedRow;
 	private TranslatorSQL t = null;
 	
-	public void translateWordsInterface(ActionEvent event) throws SQLException{
+	public void translateWordsInterface(ActionEvent event) throws SQLException, IOException{
 		if(t == null){
 			t = new TranslatorSQL();
 		}
@@ -36,7 +37,7 @@ public class TranslationBean {
 		return translatedRows;
 	}
 	
-	public void updateWord(ActionEvent event) throws SQLException{
+	public void updateWord(ActionEvent event) throws SQLException, IOException{
 		if(t == null){
 			t = new TranslatorSQL();
 		}
