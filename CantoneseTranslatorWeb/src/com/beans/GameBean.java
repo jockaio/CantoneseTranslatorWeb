@@ -1,5 +1,6 @@
 package com.beans;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,7 +13,12 @@ import com.words.Word;
 
 @ManagedBean
 @ViewScoped
-public class GameBean {
+public class GameBean implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8631719087604576409L;
 	private List<Word> quizWords;
 	private List<String> answers;
 	private Word selectedWord; 

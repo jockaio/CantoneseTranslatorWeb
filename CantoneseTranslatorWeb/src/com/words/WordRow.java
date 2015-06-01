@@ -1,9 +1,14 @@
 package com.words;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WordRow {
+public class WordRow implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5289559607290299910L;
 	private List<Word> cantoWords = null;
 	private String englishTranslation = null; 
 	private String wordString;

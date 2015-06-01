@@ -1,6 +1,7 @@
 package com.beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,12 @@ import com.words.WordRow;
 
 @ManagedBean
 @ViewScoped
-public class TranslationBean {
+public class TranslationBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6577265798039057600L;
 	private List<WordRow> translatedRows = new ArrayList<WordRow>();
 	private String userInput;
 	private Word selectedWord;
@@ -24,6 +29,7 @@ public class TranslationBean {
 	private TranslatorSQL t = null;
 	
 	public void translateWordsInterface(ActionEvent event) throws SQLException, IOException{
+		
 		if(t == null){
 			t = new TranslatorSQL();
 		}
